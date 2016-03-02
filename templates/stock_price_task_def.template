@@ -1,0 +1,41 @@
+{
+    "Resources" : {
+        "StockPriceTaskDefinition" : {
+            "Type" : "AWS::ECS::TaskDefinition",
+            "Properties" : {
+                "ContainerDefinitions": [
+                {
+                    "Environment": [
+                        {
+                            "name": "SERVICE_4567_NAME",
+                            "value": "stock-price"
+                        },
+                        {
+                            "name": "SERVICE_4567_CHECK_HTTP",
+                            "value": "/health"
+                        },
+                        {
+                            "name": "SERVICE_4567_CHECK_INTERVAL",
+                            "value": "10s"
+                        },
+                        {
+                            "name": "SERVICE_TAGS",
+                            "value": "http"
+                        }
+                    ],
+                    "Name": "stock-price",
+                    "Image": "sclausson/stock-price",
+                    "Cpu": 100,
+                    "Memory": 200,
+                    "PortMappings": [
+                        {
+                            "containerPort": 4567
+                        }
+                    ],
+                    "Essential": true
+                }
+                ]
+            }
+        }
+    }
+}
